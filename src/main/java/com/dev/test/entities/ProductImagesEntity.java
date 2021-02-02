@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -28,5 +30,9 @@ public class ProductImagesEntity implements Serializable {
 	
 	@Column(name="url")
 	private String url;
+	
+	@Column(name="product_sku")
+	@JsonIgnore
+	private Long productSku;
 
 }

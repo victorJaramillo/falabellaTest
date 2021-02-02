@@ -1,6 +1,7 @@
 package com.dev.test.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,20 @@ public class ProductService {
 	}
 	
 	public ProductEntity findProductBySku(Long sku) {
-		return repository.findById(sku).get();
+		Optional<ProductEntity> response = repository.findById(sku);
+		return response.isPresent() ? response.get(): null;
 	}
 	
 	public ProductEntity saveProduct(ProductEntity productEntity) {
-		return repository.save(productEntity);
+		Object findExistentProduct = findProductBySku(productEntity.getSku());
+		if(null == findExistentProduct) {			
+			productEntity.getOtherImages().forEach(data -> {
+				data.setProductSku(productEntity.getSku());
+			});
+			return repository.save(productEntity);
+		}else {
+			return null;
+		}
 	}
 
 }

@@ -27,7 +27,6 @@ public class ProductEntity implements Serializable {
 	
 	@Id
 	@Column(name="sku", nullable = false)
-	@NotBlank(message = "sku is mandatory")
 	private Long sku;
 	
 	@NotBlank(message = "name is mandatory")
@@ -41,7 +40,6 @@ public class ProductEntity implements Serializable {
 	@Column(name="size", nullable = true)
 	private String size;
 	
-	@NotBlank(message = "price is mandatory")
 	@Column(name="price", nullable = false)
 	private Long price;
 

@@ -41,7 +41,8 @@ public class ProductController {
 		
 		if(productEntity != null) {
 			return reponseUtil(productEntity, HttpStatus.OK);	
-		}else {			
+		}else {		
+			response.put("bad_request", "the product searched not exist");
 			return reponseUtil(response, HttpStatus.BAD_REQUEST);
 		}
 		
@@ -50,10 +51,11 @@ public class ProductController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Object> saveProduct(@Valid @RequestBody ProductEntity entity) {
 		Map<String, Object> response = new LinkedHashMap<>();
-		ProductEntity productEntity = service.saveProduct(entity);
+		Object productEntity = service.saveProduct(entity);
 		if(productEntity != null) {
-			return reponseUtil(productEntity, HttpStatus.OK);	
-		}else {			
+			return reponseUtil(productEntity, HttpStatus.CREATED);	
+		}else {
+			response.put("error", "the product already exist");
 			return reponseUtil(response, HttpStatus.BAD_REQUEST);
 		}
 	}
