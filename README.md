@@ -8,3 +8,7 @@ Empaquetar aplicación:
 Correr aplicación en modo local:
 
 > [Java] `java -jar target/*.war`
+
+Documentación API local:
+
+> [Swagger] (http://localhost:8080/swagger-ui.html)
